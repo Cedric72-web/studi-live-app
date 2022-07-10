@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('admin/category')]
+#[Route('admin/categories')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('category/index.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category/new.html.twig', [
+        return $this->renderForm('admin/category/new.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', [
+        return $this->render('admin/category/show.html.twig', [
             'category' => $category,
         ]);
     }
@@ -60,7 +60,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category/edit.html.twig', [
+        return $this->renderForm('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);
